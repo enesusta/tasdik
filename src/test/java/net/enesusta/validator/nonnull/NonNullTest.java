@@ -31,4 +31,10 @@ public class NonNullTest {
         assertFalse(manager.isValid(sampleBean));
     }
 
+    @Test
+    void bean_int_null_test() {
+        assertFalse(manager.isValid(sampleBean));
+        System.out.println("test");
+    }
+
 }

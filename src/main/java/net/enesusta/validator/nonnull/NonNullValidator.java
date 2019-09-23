@@ -19,11 +19,8 @@ public class NonNullValidator implements Validator {
             try {
                 if (field.isAnnotationPresent(NonNull.class)) {
                     NonNull nonNull = field.getAnnotation(NonNull.class);
-                    if (!nonNull.ignore()
-                        && field.get(serializable) == null
-                        && field.get(serializable).equals(0))
-                        valid = false;
-                    if(nonNull.ignore()) System.out.println(field.getName());
+                    if (nonNull.ignore()) continue;
+                    field.get(serializable);
                 }
             } catch (NullPointerException e) {
                 LogUtils.flush(String.format("%s is null", field.getName()));

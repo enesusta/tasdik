@@ -5,6 +5,7 @@ import com.google.auto.service.AutoService;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Date;
 
 @AutoService(Logger.class)
 public class FileLogger implements Logger {
@@ -12,7 +13,7 @@ public class FileLogger implements Logger {
     private BufferedWriter writer;
 
     public FileLogger() throws IOException {
-        writer = new BufferedWriter(new FileWriter("log.txt"));
+        writer = new BufferedWriter(new FileWriter("log.txt " + new Date(), true));
     }
 
     @Override

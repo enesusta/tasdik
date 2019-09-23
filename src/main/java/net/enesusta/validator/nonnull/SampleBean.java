@@ -8,7 +8,10 @@ public class SampleBean implements Serializable {
     @NonNull(ignore = true)
     private String sampleString;
 
-    @NonNull
+    @NonNull(ignore = true)
     private static String sampleStaticString;
+
+    @NonNull
+    private int sampleInt;
 
 }

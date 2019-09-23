@@ -43,6 +43,20 @@
     </dependencies>
     <build>
         <plugins>
+
+            <!--
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>1.2.1</version>
+                <configuration>
+                    <mainClass>net.enesusta.validator.nonnull.NonNullTest</mainClass>
+                    <arguments>
+                        <argument>argument1</argument>
+                    </arguments>
+                </configuration>
+            </plugin>
+            -->
             <plugin>
 
                 <groupId>org.apache.maven.plugins</groupId>
@@ -66,6 +80,7 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
                     <argLine>-Xmx1024m -XX:MaxPermSize=256m</argLine>
+                    <useFile>false</useFile>
                 </configuration>
             </plugin>
 
