@@ -4,5 +4,5 @@ import java.io.Serializable;
 import java.lang.annotation.Annotation;
 
 public interface Validator {
-    boolean isValid(Object object) throws IllegalAccessException;
+    <A extends Serializable> boolean isValid(A a) throws IllegalAccessException;
 }

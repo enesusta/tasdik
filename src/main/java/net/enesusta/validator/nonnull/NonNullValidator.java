@@ -2,13 +2,14 @@ package net.enesusta.validator.nonnull;
 
 import net.enesusta.validator.core.Validator;
 
+import java.io.Serializable;
 import java.lang.reflect.Field;
 
 public class NonNullValidator implements Validator {
     @Override
-    public boolean isValid(Object object) throws IllegalAccessException {
+    public boolean isValid(Serializable serializable) throws IllegalAccessException {
 
-        final Class<?> clazz = object.getClass();
+        final Class<?> clazz = serializable.getClass();
         final Field[] fields = clazz.getDeclaredFields();
         boolean valid = true;
 
@@ -16,8 +17,8 @@ public class NonNullValidator implements Validator {
             field.setAccessible(true);
             try {
                 if (field.isAnnotationPresent(NonNull.class)) {
-                    if (field.get(object) == null &&
-                        field.get(object).equals(0)) {
+                    if (field.get(serializable) == null &&
+                        field.get(serializable).equals(0)) {
                         valid = false;
                     }
                 }
