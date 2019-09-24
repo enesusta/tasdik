@@ -12,24 +12,22 @@ import java.util.stream.Stream;
 
 public class DefaultValidator implements Validator {
 
-    private final Object object;
-
-    public DefaultValidator(final Object object) {
-        this.object = object;
-    }
-
-
     @Override
-    public final boolean isValid() throws IllegalAccessException {
+    public final boolean isValid(final Object object) throws IllegalAccessException {
 
         final Class<?> clazz = object.getClass();
         final Field[] fields = clazz.getDeclaredFields();
         boolean valid[] = prepareValidationArray();
 
+        final FieldValidator nullValidator = new NonNullFieldValidator(object);
         final FieldValidator positiveValidator = new PositiveFieldValidator(object);
 
         for (Field field : fields) {
             field.setAccessible(true);
+            if (isAnnotationPresentWithNonNull(field))
+                valid[0] = nullValidator.isFieldValid(field);
+            else if (isAnnotationPresentWithPositive(field))
+                valid[1] = positiveValidator.isFieldValid(field);
 
         }
 
@@ -39,26 +37,9 @@ public class DefaultValidator implements Validator {
     private boolean[] prepareValidationArray() {
         boolean[] booleans = new boolean[5];
         IntStream.range(0, 5).forEach(i -> {
-            booleans[i] = false;
+            booleans[i] = true;
         });
         return booleans;
-    }
-
-    private boolean isAnnotationPresentWithNonNull(final Field field) throws IllegalAccessException {
-
-        boolean isNull = true;
-        final FieldValidator nullValidator = new NonNullFieldValidator(object);
-
-        if (field.isAnnotationPresent(NonNull.class))
-            isNull = nullValidator.isFieldValid(field);
-        else
-            isNull = false;
-
-        return field.isAnnotationPresent(NonNull.class);
-    }
-
-    private boolean isAnnotationPresentWithPositive(final Field field) {
-        return field.isAnnotationPresent(Positive.class);
     }
 
 }
