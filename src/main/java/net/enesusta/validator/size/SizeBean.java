@@ -2,7 +2,7 @@ package net.enesusta.validator.size;
 
 public class SizeBean {
 
-    @Size(max = 35)
+    @Size(min = 15, max = 35)
     private int anInt;
 
     @Size(min = 3, max = 15)

@@ -25,27 +25,35 @@ public class SizeFieldValidator implements FieldValidator {
         Object validateableObject = null;
 
         final Optional<Field> fieldOptional = Optional.ofNullable(field);
+
         if (fieldOptional.isPresent()) {
             try {
+
                 validateableObject = field.get(object);
-                if (validateableObject instanceof Number) {
-                    Size size = field.getAnnotation(Size.class);
-                    number = (Number) validateableObject;
-                    int min = size.min();
-                    int max = size.max();
-                    valid = number.intValue() > min && number.intValue() < max;
-                } else if (validateableObject instanceof String) {
-                    Size size = field.getAnnotation(Size.class);
-                    string = (String) validateableObject;
-                    int min = size.min();
-                    int max = size.max();
-                    valid = string.length() > min && string.length() < max;
-                }
+                number = (Number) validateableObject;
+                final Size size = field.getAnnotation(Size.class);
+                final int min = size.min();
+                final int max = size.max();
+                valid = number.intValue() > min && number.intValue() < max;
+
+                Size sizeStr = field.getAnnotation(Size.class);
+                string = (String) validateableObject;
+                final int minStr = size.min();
+                final int maxStr = size.max();
+                System.out.println("min = " + minStr);
+                System.out.println("max = " + maxStr);
+                System.out.println("string.length() = " + string.length());
+                valid = string.length() >= minStr && string.length() <= maxStr;
+
             } catch (NullPointerException e) {
                 valid = false;
+            } catch (NumberFormatException e) {
+                valid = false;
+            } catch (ClassCastException e) {
+                valid = false;
             }
-        }
 
+        }
         return valid;
     }
 }

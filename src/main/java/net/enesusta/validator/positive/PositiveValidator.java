@@ -1,5 +1,7 @@
-package net.enesusta.validator.core;
+package net.enesusta.validator.positive;
 
+import net.enesusta.validator.core.FieldValidator;
+import net.enesusta.validator.core.Validator;
 import net.enesusta.validator.positive.PositiveFieldValidator;
 
 import java.lang.reflect.Field;
@@ -12,7 +14,6 @@ public class PositiveValidator implements Validator {
         final Class<?> clazz = object.getClass();
         final Field[] fields = clazz.getDeclaredFields();
         final FieldValidator fieldValidator = new PositiveFieldValidator(object);
-        boolean isValid = true;
         boolean hasAnyFalse = false;
 
         for (Field field : fields)
