@@ -13,12 +13,13 @@ public class SizeValidator implements Validator {
         final Class<?> clazz = object.getClass();
         final Field[] fields = clazz.getDeclaredFields();
         final FieldValidator fieldValidator = new SizeFieldValidator(object);
-        boolean isValid = false;
+        boolean hasAnyFalse = false;
 
         for (Field field : fields)
             if (isAnnotationPresentWithSizeAnnotation(field))
-                isValid = fieldValidator.isFieldValid(field);
+                if (!fieldValidator.isFieldValid(field))
+                    hasAnyFalse = true;
 
-        return isValid;
+        return !hasAnyFalse;
     }
 }

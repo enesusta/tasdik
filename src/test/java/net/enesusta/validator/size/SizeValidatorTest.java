@@ -25,7 +25,17 @@ public class SizeValidatorTest {
         assertFalse(validator.isValid(sizeBean));
         sizeBean.setAnInt(17);
         assertTrue(validator.isValid(sizeBean));
+        sizeBean.setAnInt(36);
+        assertFalse(validator.isValid(sizeBean));
     }
+
+    @Test
+    void valid_floating_numbers() throws IllegalAccessException {
+        bean.setaFloat(3.2f);
+        bean.setaDouble(4.3d);
+        assertFalse(validator.isValid(bean));
+    }
+
 
     @Test
     void valid_string() throws IllegalAccessException {
@@ -33,6 +43,11 @@ public class SizeValidatorTest {
         sizeBean.setString("a123");
         sizeBean.setString2("a1322312");
         assertFalse(validator.isValid(sizeBean));
+        sizeBean.setString("a");
+        assertFalse(validator.isValid(sizeBean));
+        sizeBean.setString("a323");
+        sizeBean.setString2("231");
+        assertTrue(validator.isValid(sizeBean));
     }
 
 }

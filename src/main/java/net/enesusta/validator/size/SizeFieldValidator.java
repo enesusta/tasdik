@@ -26,49 +26,34 @@ public class SizeFieldValidator implements FieldValidator {
 
         try {
             validateableObject = field.get(object);
-            if (validateableObject instanceof Number) {
+            if (Number.class.isInstance(validateableObject)) {
                 block:
                 {
                     number = (Number) validateableObject;
-                    if (number.intValue() == 0) {
-                        valid = true;
+                    if (number.intValue() == 0)
                         break block;
-                    }
-                    System.out.println("evet number bu");
                     final Size size = field.getAnnotation(Size.class);
                     final int min = size.min();
                     final int max = size.max();
-                    System.out.println(min);
-                    System.out.println(max);
-                    System.out.println(number.intValue());
                     valid = number.intValue() >= min && number.intValue() <= max;
-                    System.out.println("valid1 = " + valid);
-                    System.out.println("============");
                 }
-            } else if (validateableObject instanceof String) {
+            } else if (String.class.isInstance(validateableObject)) {
                 block:
                 {
-                    System.out.println("evet string bu");
-                    Size size = field.getAnnotation(Size.class);
                     string = (String) validateableObject;
-                    if (string.isBlank()) {
-                        valid = true;
+                    if (string.isEmpty())
                         break block;
-                        System.out.println("girdi");
-                    }
+                    Size size = field.getAnnotation(Size.class);
                     final int minStr = size.min();
                     final int maxStr = size.max();
-                    System.out.println("min = " + minStr);
-                    System.out.println("max = " + maxStr);
-                    System.out.println("string.length() = " + string.length());
                     valid = string.length() >= minStr && string.length() <= maxStr;
                 }
             }
-            System.out.println("va = " + valid);
         } catch (NullPointerException e) {
             valid = false;
         }
 
+        System.out.println(valid);
         return valid;
     }
 }
