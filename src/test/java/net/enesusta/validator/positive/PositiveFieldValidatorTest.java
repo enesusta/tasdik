@@ -32,6 +32,13 @@ class PositiveFieldValidatorTest {
         assertFalse(validator.isValid(bean));
     }
 
-    
+    @Test
+    void valid_int() throws IllegalAccessException {
+        bean.setAnInt(-34123);
+        assertFalse(validator.isValid(bean));
+        bean.setAnInt(132);
+        assertTrue(validator.isValid(bean));
+    }
+
 
 }
