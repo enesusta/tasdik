@@ -5,6 +5,7 @@ import net.enesusta.validator.nonnull.NonNull;
 
 import java.lang.reflect.Field;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 public class PositiveFieldValidator implements FieldValidator {
 
@@ -32,6 +33,11 @@ public class PositiveFieldValidator implements FieldValidator {
 
     private <E extends Number> boolean isPositive(E e) {
         int value = (int) e.intValue();
+        System.out.println("value = " + value);
+        boolean bool = value >= 0;
+        System.out.println(bool);
         return value >= 0;
     }
+
+
 }
