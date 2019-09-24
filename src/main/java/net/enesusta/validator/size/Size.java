@@ -11,4 +11,5 @@ public @interface Size {
     int min() default 0;
 
     int max();
+
 }

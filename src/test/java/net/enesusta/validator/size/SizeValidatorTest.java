@@ -17,21 +17,22 @@ public class SizeValidatorTest {
         validator = new SizeValidator();
     }
 
-    /*
-        @Test
-        void valid_int() throws IllegalAccessException {
-            bean.setAnInt(14);
-            assertFalse(validator.isValid(bean));
-            bean.setAnInt(32);
-            assertTrue(validator.isValid(bean));
-        }
-    */
+
+    @Test
+    void valid_int() throws IllegalAccessException {
+        SizeBean sizeBean = new SizeBean();
+        sizeBean.setAnInt(13);
+        assertFalse(validator.isValid(sizeBean));
+        sizeBean.setAnInt(17);
+        assertTrue(validator.isValid(sizeBean));
+    }
+
     @Test
     void valid_string() throws IllegalAccessException {
-        bean.setString("test");
-        assertTrue(validator.isValid(bean));
-        bean.setString("te");
-        assertFalse(validator.isValid(bean));
+        SizeBean sizeBean = new SizeBean();
+        sizeBean.setString("a123");
+        sizeBean.setString2("a1322312");
+        assertFalse(validator.isValid(sizeBean));
     }
 
 }
