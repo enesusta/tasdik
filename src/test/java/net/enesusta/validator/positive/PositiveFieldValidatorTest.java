@@ -24,12 +24,16 @@ class PositiveFieldValidatorTest {
     void valid_byte() throws IllegalAccessException {
         bean.setaByte((byte) -120);
         assertFalse(validator.isValid(bean));
+        bean.setaByte((byte) 34);
+        assertTrue(validator.isValid(bean));
     }
 
     @Test
     void valid_short() throws IllegalAccessException {
         bean.setaShort((short) -30000);
         assertFalse(validator.isValid(bean));
+        bean.setaShort((short) 1323);
+        assertTrue(validator.isValid(bean));
     }
 
     @Test

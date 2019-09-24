@@ -25,15 +25,22 @@ public class PositiveFieldValidator implements FieldValidator {
         final Optional<Field> fieldOptional = Optional.ofNullable(field);
         if (fieldOptional.isPresent()) {
             number = (Number) field.get(object);
-            valid = isPositive(number);
+            valid = isPositive(number,field);
         }
 
         return valid;
     }
 
-    private <E extends Number> boolean isPositive(E e) {
+    private <E extends Number> boolean isPositive(E e, final Field field) {
         int value = (int) e.intValue();
+        result(field.getName(), value, value >= 0);
         return value >= 0;
+    }
+
+    private void result(String name, int a, boolean b) {
+        System.out.println("\n ===================== ");
+        System.out.println(name + " = " + a + " isValid = " + b);
+        System.out.println(" ===================== ");
     }
 
 

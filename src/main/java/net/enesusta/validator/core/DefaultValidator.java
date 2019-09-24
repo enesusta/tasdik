@@ -24,9 +24,9 @@ public class DefaultValidator implements Validator {
 
         for (Field field : fields) {
             field.setAccessible(true);
-            if (isAnnotationPresentWithNonNull(field))
+            if (isAnnotationPresentWithNonNullAnnotation(field))
                 valid[0] = nullValidator.isFieldValid(field);
-            else if (isAnnotationPresentWithPositive(field))
+            else if (isAnnotationPresentWithPositiveAnnotation(field))
                 valid[1] = positiveValidator.isFieldValid(field);
 
         }

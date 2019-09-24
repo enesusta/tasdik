@@ -16,7 +16,7 @@ public class PositiveValidator implements Validator {
         boolean hasAnyFalse = false;
 
         for (Field field : fields)
-            if (isAnnotationPresentWithPositive(field))
+            if (isAnnotationPresentWithPositiveAnnotation(field))
                 if (!fieldValidator.isFieldValid(field))
                     hasAnyFalse = true;
 
