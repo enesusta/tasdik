@@ -17,7 +17,7 @@ public class NonNullTest {
     @BeforeEach
     void before() {
         sampleBean = new SampleBean();
-        validator = new NonNullValidator();
+        validator = new NonNullFieldValidator();
         manager = new ValidatorManager(validator);
     }
 

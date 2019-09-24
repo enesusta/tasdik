@@ -2,6 +2,7 @@ package net.enesusta.validator.core;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 
 public class ValidatorManager {
 
@@ -11,10 +12,10 @@ public class ValidatorManager {
         this.validator = validator;
     }
 
-    public boolean isValid(final Serializable serializable) {
+    public boolean isValid(final Field field) {
         boolean status = false;
         try {
-            status = validator.isValid(serializable);
+            status = validator.isValid(field);
         } catch (IllegalAccessException ex) {
             ex.printStackTrace();
         }
