@@ -20,12 +20,14 @@ public class PositiveFieldValidator implements FieldValidator {
 
         field.setAccessible(true);
         boolean valid = true;
-        Number number = null;
 
-        final Optional<Field> fieldOptional = Optional.ofNullable(field);
-        if (fieldOptional.isPresent()) {
-            number = (Number) field.get(object);
-            valid = isPositive(number,field);
+        try {
+
+            final Number number = (Number) field.get(object);
+            valid = isPositive(number, field);
+
+        } catch (NullPointerException e) {
+            valid = false;
         }
 
         return valid;
