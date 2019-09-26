@@ -53,7 +53,6 @@ public class SizeFieldValidator implements FieldValidator {
             valid = false;
         }
 
-        System.out.println(valid);
         return valid;
     }
 }

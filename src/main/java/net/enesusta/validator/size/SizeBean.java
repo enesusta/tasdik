@@ -1,5 +1,8 @@
 package net.enesusta.validator.size;
 
+import net.enesusta.validator.nonnull.NonNull;
+import net.enesusta.validator.positive.Positive;
+
 public class SizeBean {
 
     @Size(min = 15, max = 35)

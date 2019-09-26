@@ -1,5 +1,6 @@
 package net.enesusta.validator.core;
 
+import net.enesusta.validator.min.Min;
 import net.enesusta.validator.nonnull.NonNull;
 import net.enesusta.validator.positive.Positive;
 import net.enesusta.validator.size.Size;
@@ -17,5 +18,9 @@ public interface AnnotationValidator {
 
     default boolean isAnnotationPresentWithSizeAnnotation(final Field field) {
         return field.isAnnotationPresent(Size.class);
+    }
+
+    default boolean isAnnotationPresentWithMinAnnotation(final Field field) {
+        return field.isAnnotationPresent(Min.class);
     }
 }
