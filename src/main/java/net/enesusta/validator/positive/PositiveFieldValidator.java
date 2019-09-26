@@ -34,7 +34,7 @@ public class PositiveFieldValidator implements FieldValidator {
     }
 
     private <E extends Number> boolean isPositive(E e, final Field field) {
-        int value = (int) e.intValue();
+        int value = e.intValue();
         result(field.getName(), value, value >= 0);
         return value >= 0;
     }

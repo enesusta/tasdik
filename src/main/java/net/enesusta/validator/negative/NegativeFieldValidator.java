@@ -21,17 +21,22 @@ public class NegativeFieldValidator implements FieldValidator {
         try {
 
             final Number number = (Number) field.get(object);
-            valid = isNegative(number);
+            block:
+            {
+                if (number.intValue() == 0)
+                    break block;
+                valid = isNegative(number);
+            }
 
         } catch (NullPointerException e) {
             valid = false;
         }
 
-        return false;
+        return valid;
     }
 
     private <E extends Number> boolean isNegative(final E e) {
-        int value = (int) e.intValue();
+        int value = e.intValue();
         return value <= 0;
     }
 
