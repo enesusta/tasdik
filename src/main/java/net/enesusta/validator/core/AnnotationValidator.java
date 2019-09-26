@@ -1,5 +1,6 @@
 package net.enesusta.validator.core;
 
+import net.enesusta.validator.max.Max;
 import net.enesusta.validator.min.Min;
 import net.enesusta.validator.nonnull.NonNull;
 import net.enesusta.validator.positive.Positive;
@@ -22,5 +23,9 @@ public interface AnnotationValidator {
 
     default boolean isAnnotationPresentWithMinAnnotation(final Field field) {
         return field.isAnnotationPresent(Min.class);
+    }
+
+    default boolean isAnnotationPresentWithMaxAnnotation(final Field field) {
+        return field.isAnnotationPresent(Max.class);
     }
 }

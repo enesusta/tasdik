@@ -8,7 +8,7 @@ public class MinBean {
     @Min(min = 5)
     private short aShort;
 
-    @Min(min = 5)
+    @Min(min = 6)
     private int anInt;
 
     @Min(min = 5)
@@ -19,6 +19,9 @@ public class MinBean {
 
     @Min(min = 5)
     private float aFloat;
+
+    @Min(min = 5)
+    private String string;
 
     public void setaByte(byte aByte) {
         this.aByte = aByte;
@@ -42,5 +45,9 @@ public class MinBean {
 
     public void setaFloat(float aFloat) {
         this.aFloat = aFloat;
+    }
+
+    public void setString(String string) {
+        this.string = string;
     }
 }

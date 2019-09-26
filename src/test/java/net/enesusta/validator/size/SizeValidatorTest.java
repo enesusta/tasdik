@@ -1,6 +1,7 @@
 package net.enesusta.validator.size;
 
 import net.enesusta.validator.core.Validator;
+import net.enesusta.validator.min.Min;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

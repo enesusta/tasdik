@@ -1,14 +1,14 @@
-package net.enesusta.validator.min;
+package net.enesusta.validator.max;
 
 import net.enesusta.validator.core.FieldValidator;
 
 import java.lang.reflect.Field;
 
-public class MinFieldValidator implements FieldValidator {
+public class MaxFieldValidator implements FieldValidator {
 
     private Object object;
 
-    public MinFieldValidator(final Object object) {
+    public MaxFieldValidator(final Object object) {
         this.object = object;
     }
 
@@ -27,26 +27,22 @@ public class MinFieldValidator implements FieldValidator {
                     final Number number = (Number) validateableObject;
                     if (number.intValue() == 0)
                         break block;
-                    final Min annotation = field.getAnnotation(Min.class);
-                    System.out.println("annotation = " + annotation.min());
-                    valid = number.intValue() >= annotation.min();
-                    System.out.println(field.getName() + " value + " + number.intValue() + "  first valid " + valid);
+                    final Max annotation = field.getAnnotation(Max.class);
+                    valid = number.intValue() <= annotation.max();
                 }
             } else if (String.class.isInstance(validateableObject)) {
                 block:
                 {
-                    String string = (String) validateableObject;
+                    final String string = (String) validateableObject;
                     if (string.isEmpty()) break block;
-                    final Min annotation = field.getAnnotation(Min.class);
-                    valid = string.length() >= annotation.min();
-                    System.out.println(field.getName() + " value + " + string.length() + "  first valid " + valid);
+                    final Max annotation = field.getAnnotation(Max.class);
+                    valid = string.length() <= annotation.max();
                 }
             }
 
         } catch (NullPointerException e) {
             valid = false;
         }
-
         return valid;
     }
 }
