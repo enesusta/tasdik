@@ -1,14 +1,14 @@
-package net.enesusta.validator.negative;
+package net.enesusta.validator.email;
 
 import net.enesusta.validator.core.FieldValidator;
 
 import java.lang.reflect.Field;
 
-public class NegativeFieldValidator implements FieldValidator {
+public class EmailFieldValidator implements FieldValidator {
 
     private Object object;
 
-    public NegativeFieldValidator(final Object object) {
+    public EmailFieldValidator(final Object object) {
         this.object = object;
     }
 
@@ -20,12 +20,11 @@ public class NegativeFieldValidator implements FieldValidator {
 
         try {
 
-            final Number number = (Number) field.get(object);
+            final String fieldString = (String) field.get(object);
             block:
             {
-                if (number.intValue() == 0)
-                    break block;
-                valid = isNegative(number);
+                if (fieldString.isBlank()) break block;
+                valid = isStringEmail(fieldString);
             }
 
         } catch (Exception e) {
@@ -35,10 +34,8 @@ public class NegativeFieldValidator implements FieldValidator {
         return valid;
     }
 
-    private <E extends Number> boolean isNegative(final E e) {
-        int value = e.intValue();
-        return value <= 0;
+    private boolean isStringEmail(final String string) {
+        return string.indexOf("@") > 0;
     }
-
 
 }
