@@ -1,5 +1,6 @@
 package net.enesusta.validator.core;
 
+import net.enesusta.validator.email.Email;
 import net.enesusta.validator.max.Max;
 import net.enesusta.validator.min.Min;
 import net.enesusta.validator.negative.Negative;
@@ -32,5 +33,9 @@ public interface AnnotationValidator {
 
     default boolean isAnnotationPresentWithNegativeAnnotation(final Field field) {
         return field.isAnnotationPresent(Negative.class);
+    }
+
+    default boolean isAnnotationPresentWithEmailAnnotation(final Field field) {
+        return field.isAnnotationPresent(Email.class);
     }
 }
