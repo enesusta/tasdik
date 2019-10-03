@@ -24,10 +24,17 @@ class DefaultValidatorTest {
         student.setStduSurname("usta");
         student.setStduAddress("testtesttsetestettest");
         student.setStduNote((byte) 80);
+        student.setStduEmail("a@com");
 
         boolean valid = validator.isValid(student);
-        System.out.println("valid = " + valid);
+        System.out.println("valid1 = " + valid);
         assertFalse(valid);
+
+        student.setStduID(9);
+
+        boolean valid2 = validator.isValid(student);
+        System.out.println("valid2 = " + valid2);
+        assertTrue(valid2);
 
     }
 
