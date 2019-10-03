@@ -8,7 +8,7 @@ import java.lang.reflect.Field;
 public class MaxValidator implements Validator {
 
     @Override
-    public boolean isValid(Object object) throws IllegalAccessException {
+    public final boolean isValid(final Object object) throws IllegalAccessException {
 
         final Class<?> clazz = object.getClass();
         final Field[] fields = clazz.getDeclaredFields();

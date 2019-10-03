@@ -11,6 +11,7 @@ import net.enesusta.validator.positive.Positive;
 import net.enesusta.validator.positive.PositiveFieldValidator;
 import net.enesusta.validator.size.SizeFieldValidator;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -55,6 +56,7 @@ public class DefaultValidator implements Validator {
             }
             if (isAnnotationPresentWithMaxAnnotation(field)) {
                 valid[4] = maxValidator.isFieldValid(field);
+                System.out.println("bu = :" + valid[4]);
                 System.out.printf("Max annotation state :%b \n", valid[4]);
             }
             if (isAnnotationPresentWithMinAnnotation(field)) {
@@ -66,6 +68,7 @@ public class DefaultValidator implements Validator {
                 System.out.printf("Email annotation state :%b \n", valid[6]);
             }
 
+            System.out.println("bu 1 "  + valid[4]);
 
             System.out.println("\n\n\nAYRIM ======================================= AYRIM\n\n\n");
         }
@@ -83,14 +86,18 @@ public class DefaultValidator implements Validator {
         return booleans;
     }
 
+
     private boolean hasAnyFalse(final boolean[] booleans) {
         boolean valid = true;
         for (boolean aBoolean : booleans) {
+            System.out.println("booleans : " + aBoolean);
             if (!aBoolean) {
                 valid = false;
                 break;
             }
         }
+        System.out.println("has any false : " + valid);
+        System.out.println("valid[4] : " + booleans[4]);
         return valid;
     }
 }
