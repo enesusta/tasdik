@@ -11,6 +11,7 @@ import net.enesusta.validator.positive.Positive;
 import net.enesusta.validator.positive.PositiveFieldValidator;
 import net.enesusta.validator.size.SizeFieldValidator;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -35,7 +36,13 @@ public class DefaultValidator implements Validator {
 
         for (Field field : fields) {
             field.setAccessible(true);
-            System.out.println(field.getName());
+            if (field.getName().equalsIgnoreCase("stduid")) {
+                final Annotation[] annotations = field.getAnnotations();
+                for (Annotation annotation : annotations) {
+                    System.out.println(annotation);
+                }
+            }
+
             if (isAnnotationPresentWithNonNullAnnotation(field))
                 valid[0] = nullValidator.isFieldValid(field);
             else if (isAnnotationPresentWithPositiveAnnotation(field))
@@ -44,12 +51,13 @@ public class DefaultValidator implements Validator {
                 valid[2] = negativeValidator.isFieldValid(field);
             else if (isAnnotationPresentWithSizeAnnotation(field))
                 valid[3] = sizeValidator.isFieldValid(field);
-            else if (isAnnotationPresentWithMaxAnnotation(field))
+            else if (isAnnotationPresentWithMaxAnnotation(field)) {
                 valid[4] = maxValidator.isFieldValid(field);
-            else if (isAnnotationPresentWithMinAnnotation(field))
+                System.out.println("default is : " + valid[4]);
+            } else if (isAnnotationPresentWithMinAnnotation(field))
                 valid[5] = minValidator.isFieldValid(field);
-
-
+            else if (isAnnotationPresentWithEmailAnnotation(field))
+                valid[6] = emailValidator.isFieldValid(field);
         }
 
         return hasAnyFalse(valid);
@@ -57,8 +65,8 @@ public class DefaultValidator implements Validator {
 
     private boolean[] prepareValidationArray() {
 
-        boolean[] booleans = new boolean[6];
-        IntStream.range(0, 6).forEach(i -> {
+        boolean[] booleans = new boolean[7];
+        IntStream.range(0, 7).forEach(i -> {
             booleans[i] = true;
         });
 

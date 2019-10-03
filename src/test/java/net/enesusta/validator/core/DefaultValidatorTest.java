@@ -19,13 +19,15 @@ class DefaultValidatorTest {
     void complexBeanTest_posivite() throws Exception {
 
         Student student = new Student();
-        student.setStduID(5);
+        student.setStduID(11);
         student.setStduName("enes");
         student.setStduSurname("usta");
         student.setStduAddress("testtesttsetestettest");
         student.setStduNote((byte) 80);
 
-        assertTrue(validator.isValid(student));
+        boolean valid = validator.isValid(student);
+        System.out.println("valid = " + valid);
+        assertFalse(valid);
 
     }
 
@@ -38,6 +40,7 @@ class DefaultValidatorTest {
         student.setStduSurname("usta");
         student.setStduAddress("testtesttsetestettest");
         student.setStduNote((byte) 80);
+        student.setStduEmail("test@com");
 
         assertTrue(validator.isValid(student));
     }
