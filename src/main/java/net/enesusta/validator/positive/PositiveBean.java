@@ -1,8 +1,6 @@
 package net.enesusta.validator.positive;
 
-import net.enesusta.validator.core.Bean;
-
-public class PositiveBean implements Bean {
+public class PositiveBean {
 
     @Positive
     private byte aByte;
@@ -22,10 +20,6 @@ public class PositiveBean implements Bean {
     @Positive
     private double aDouble;
 
-    @Override
-    public Object get() {
-        return this;
-    }
 
     public byte getaByte() {
         return aByte;
