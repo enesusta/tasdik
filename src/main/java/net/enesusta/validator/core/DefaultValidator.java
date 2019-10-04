@@ -23,7 +23,6 @@ public class DefaultValidator implements Validator {
 
         final Class<?> clazz = object.getClass();
         final Field[] fields = clazz.getDeclaredFields();
-        boolean valid[] = prepareValidationArray();
 
         final FieldValidator nullValidator = new NonNullFieldValidator(object);
         final FieldValidator positiveValidator = new PositiveFieldValidator(object);
@@ -34,52 +33,51 @@ public class DefaultValidator implements Validator {
         final FieldValidator emailValidator = new EmailFieldValidator(object);
 
 
+        boolean[] valid = prepareValidationArray();
+        boolean[] nullBooleans = prepareValidationArray();
+        boolean[] positiveBooleans = prepareValidationArray();
+        boolean[] negativeBooleans = prepareValidationArray();
+        boolean[] sizeBooleans = prepareValidationArray();
+        boolean[] maxBooleans = prepareValidationArray();
+        boolean[] minBooleans = prepareValidationArray();
+        boolean[] emailBooleans = prepareValidationArray();
+
+
+        byte counter = (byte) 0;
         for (Field field : fields) {
 
-            System.out.printf("Field name is : %s \n", field.getName());
             field.setAccessible(true);
-            if (isAnnotationPresentWithNonNullAnnotation(field)) {
-                valid[0] = nullValidator.isFieldValid(field);
-                System.out.printf("Null annotation state : %b \n", valid[0]);
-            }
-            if (isAnnotationPresentWithPositiveAnnotation(field)) {
-                valid[1] = positiveValidator.isFieldValid(field);
-                System.out.printf("Positive annotation state :%b \n", valid[1]);
-            }
-            if (isAnnotationPresentWithNegativeAnnotation(field)) {
-                valid[2] = negativeValidator.isFieldValid(field);
-                System.out.printf("Negative annotation state :%b \n", valid[2]);
-            }
-            if (isAnnotationPresentWithSizeAnnotation(field)) {
-                valid[3] = sizeValidator.isFieldValid(field);
-                System.out.printf("Size annotation state :%b \n", valid[3]);
-            }
-            if (isAnnotationPresentWithMaxAnnotation(field)) {
-                valid[4] = maxValidator.isFieldValid(field);
-                System.out.println("bu = :" + valid[4]);
-                System.out.printf("Max annotation state :%b \n", valid[4]);
-            }
-            if (isAnnotationPresentWithMinAnnotation(field)) {
-                valid[5] = minValidator.isFieldValid(field);
-                System.out.printf("Min annotation state : %b \n", valid[5]);
-            }
-            if (isAnnotationPresentWithEmailAnnotation(field)) {
-                valid[6] = emailValidator.isFieldValid(field);
-                System.out.printf("Email annotation state :%b \n", valid[6]);
-            }
-
-            System.out.println("bu 1 "  + valid[4]);
-
-            System.out.println("\n\n\nAYRIM ======================================= AYRIM\n\n\n");
+            if (isAnnotationPresentWithNonNullAnnotation(field))
+                nullBooleans[counter] = nullValidator.isFieldValid(field);
+            if (isAnnotationPresentWithPositiveAnnotation(field))
+                positiveBooleans[counter] = positiveValidator.isFieldValid(field);
+            if (isAnnotationPresentWithNegativeAnnotation(field))
+                negativeBooleans[counter] = negativeValidator.isFieldValid(field);
+            if (isAnnotationPresentWithSizeAnnotation(field))
+                sizeBooleans[counter] = sizeValidator.isFieldValid(field);
+            if (isAnnotationPresentWithMaxAnnotation(field))
+                maxBooleans[counter] = maxValidator.isFieldValid(field);
+            if (isAnnotationPresentWithMinAnnotation(field))
+                minBooleans[counter] = minValidator.isFieldValid(field);
+            if (isAnnotationPresentWithEmailAnnotation(field))
+                emailBooleans[counter] = emailValidator.isFieldValid(field);
         }
+
+        valid[0] = hasAnyFalse(nullBooleans);
+        valid[1] = hasAnyFalse(positiveBooleans);
+        valid[2] = hasAnyFalse(negativeBooleans);
+        valid[3] = hasAnyFalse(sizeBooleans);
+        valid[4] = hasAnyFalse(maxBooleans);
+        valid[5] = hasAnyFalse(minBooleans);
+        valid[6] = hasAnyFalse(emailBooleans);
 
         return hasAnyFalse(valid);
     }
 
     private boolean[] prepareValidationArray() {
 
-        boolean[] booleans = new boolean[7];
-        IntStream.range(0, 7).forEach(i -> {
+        boolean[] booleans = new boolean[10];
+        IntStream.range(0, 10).forEach(i -> {
             booleans[i] = true;
         });
 
@@ -90,14 +88,11 @@ public class DefaultValidator implements Validator {
     private boolean hasAnyFalse(final boolean[] booleans) {
         boolean valid = true;
         for (boolean aBoolean : booleans) {
-            System.out.println("booleans : " + aBoolean);
             if (!aBoolean) {
                 valid = false;
                 break;
             }
         }
-        System.out.println("has any false : " + valid);
-        System.out.println("valid[4] : " + booleans[4]);
         return valid;
     }
 }
