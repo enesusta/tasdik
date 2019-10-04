@@ -28,13 +28,18 @@ class DefaultValidatorTest {
 
         boolean valid = validator.isValid(student);
         System.out.println("valid1 = " + valid);
-        assertFalse(valid);
+        assertTrue(valid);
 
-        student.setStduID(9);
+        student.setStduName("a1132123123321");
+        assertFalse(validator.isValid(student));
 
-        boolean valid2 = validator.isValid(student);
-        System.out.println("valid2 = " + valid2);
-        assertTrue(valid2);
+        student.setStduName("12345");
+        assertTrue(validator.isValid(student));
+
+        student.setStduNote((byte) 120);
+        assertFalse(validator.isValid(student));
+
+
 
     }
 
@@ -49,7 +54,7 @@ class DefaultValidatorTest {
         student.setStduNote((byte) 80);
         student.setStduEmail("test@com");
 
-        assertTrue(validator.isValid(student));
+        assertFalse(validator.isValid(student));
     }
 
 

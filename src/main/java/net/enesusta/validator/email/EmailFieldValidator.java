@@ -23,7 +23,7 @@ public class EmailFieldValidator implements FieldValidator {
             final String fieldString = (String) field.get(object);
             block:
             {
-                if (fieldString.isBlank()) break block;
+                if (fieldString.isEmpty()) break block;
                 valid = isStringEmail(fieldString);
             }
 

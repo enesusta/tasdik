@@ -1,22 +1,18 @@
 package net.enesusta.validator.core;
 
-import net.enesusta.validator.core.log.LogUtils;
 import net.enesusta.validator.email.EmailFieldValidator;
 import net.enesusta.validator.max.MaxFieldValidator;
 import net.enesusta.validator.min.MinFieldValidator;
 import net.enesusta.validator.negative.NegativeFieldValidator;
-import net.enesusta.validator.nonnull.NonNull;
 import net.enesusta.validator.nonnull.NonNullFieldValidator;
-import net.enesusta.validator.positive.Positive;
 import net.enesusta.validator.positive.PositiveFieldValidator;
 import net.enesusta.validator.size.SizeFieldValidator;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.Arrays;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
-public class DefaultValidator implements Validator {
+public final class DefaultValidator implements Validator {
 
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {
@@ -61,6 +57,8 @@ public class DefaultValidator implements Validator {
                 minBooleans[counter] = minValidator.isFieldValid(field);
             if (isAnnotationPresentWithEmailAnnotation(field))
                 emailBooleans[counter] = emailValidator.isFieldValid(field);
+
+            counter++;
         }
 
         valid[0] = hasAnyFalse(nullBooleans);
@@ -77,9 +75,7 @@ public class DefaultValidator implements Validator {
     private boolean[] prepareValidationArray() {
 
         boolean[] booleans = new boolean[10];
-        IntStream.range(0, 10).forEach(i -> {
-            booleans[i] = true;
-        });
+        Arrays.fill(booleans,true);
 
         return booleans;
     }

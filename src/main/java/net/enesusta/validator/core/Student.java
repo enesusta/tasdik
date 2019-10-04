@@ -9,7 +9,7 @@ import net.enesusta.validator.size.Size;
 public class Student {
 
     @Positive
-    @Max(max = 10)
+    @Max(max = 15)
     private int stduID;
 
     @Size(min = 3, max = 10)
