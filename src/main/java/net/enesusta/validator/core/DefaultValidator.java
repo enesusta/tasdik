@@ -10,7 +10,6 @@ import net.enesusta.validator.size.SizeFieldValidator;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 public final class DefaultValidator implements Validator {
 
