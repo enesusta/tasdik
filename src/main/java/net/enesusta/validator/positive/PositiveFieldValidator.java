@@ -1,6 +1,8 @@
+
 package net.enesusta.validator.positive;
 
 import net.enesusta.validator.core.FieldValidator;
+
 import java.lang.reflect.Field;
 
 /**
@@ -11,12 +13,10 @@ import java.lang.reflect.Field;
 
 public class PositiveFieldValidator implements FieldValidator {
 
-
     private Object object;
 
     /**
-     *
-      * @param object a
+     * @param object a
      */
 
     @SuppressWarnings("checkstyle:HiddenField")
@@ -25,14 +25,14 @@ public class PositiveFieldValidator implements FieldValidator {
     }
 
     /**
-     *
      * @param field
-     * @return
+     * @return boolean
      * @throws IllegalAccessException
      */
 
     @Override
-    public final boolean isFieldValid(final Field field) throws IllegalAccessException {
+    public final boolean isFieldValid(final Field field)
+        throws IllegalAccessException {
 
         field.setAccessible(true);
         boolean valid = true;
@@ -50,24 +50,23 @@ public class PositiveFieldValidator implements FieldValidator {
     }
 
     /**
-     * @param e e
+     * @param e     e
      * @param field a
-     * @param <E> a
+     * @param <E>   a
      * @return boolean
      */
 
-    private <E extends Number> boolean isPositive(final E e, final Field field) {
+    private <E extends Number> boolean isPositive(final E e,
+                                                  final Field field) {
         int value = e.intValue();
         result(field.getName(), value, value >= 0);
         return value >= 0;
     }
 
     /**
-     *
-     * @param name
-     * @param a
-     * @param b
-     *
+     * @param name a
+     * @param a    a
+     * @param b    a
      */
     private void result(final String name, final int a, final boolean b) {
         System.out.println("\n ===================== ");
