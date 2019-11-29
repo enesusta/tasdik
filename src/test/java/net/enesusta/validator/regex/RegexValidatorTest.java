@@ -21,6 +21,7 @@ class RegexValidatorTest {
         RegexBean regexBean = new RegexBean();
         regexBean.setTest1("123");
         assertTrue(validator.isValid(regexBean));
+
     }
 
 }

@@ -52,7 +52,7 @@ public class Student {
         return stduEmail;
     }
 
-    public void setStduEmail(String stduEmail) {
+    void setStduEmail(String stduEmail) {
         this.stduEmail = stduEmail;
     }
 }

@@ -72,10 +72,8 @@ public final class DefaultValidator implements Validator {
     }
 
     private boolean[] prepareValidationArray() {
-
         boolean[] booleans = new boolean[10];
         Arrays.fill(booleans,true);
-
         return booleans;
     }
 
