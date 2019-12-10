@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>NegativeFieldValidator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">validator</a> &gt; <a href="index.source.html" class="el_package">net.enesusta.validator.negative</a> &gt; <span class="el_source">NegativeFieldValidator.java</span></div><h1>NegativeFieldValidator.java</h1><pre class="source lang-java linenums">package net.enesusta.validator.negative;
+
+import net.enesusta.validator.core.FieldValidator;
+
+import java.lang.reflect.Field;
+
+public class NegativeFieldValidator implements FieldValidator {
+
+    private Object object;
+
+<span class="fc" id="L11">    public NegativeFieldValidator(final Object object) {</span>
+<span class="fc" id="L12">        this.object = object;</span>
+<span class="fc" id="L13">    }</span>
+
+    @Override
+    public final boolean isFieldValid(final Field field) throws IllegalAccessException {
+
+<span class="fc" id="L18">        field.setAccessible(true);</span>
+<span class="fc" id="L19">        boolean valid = true;</span>
+
+        try {
+
+<span class="fc" id="L23">            final Number number = (Number) field.get(object);</span>
+            block:
+            {
+<span class="fc bfc" id="L26" title="All 2 branches covered.">                if (number.intValue() == 0)</span>
+<span class="fc" id="L27">                    break block;</span>
+<span class="fc" id="L28">                valid = isNegative(number);</span>
+            }
+
+<span class="nc" id="L31">        } catch (Exception e) {</span>
+<span class="nc" id="L32">            valid = false;</span>
+<span class="fc" id="L33">        }</span>
+
+<span class="fc" id="L35">        return valid;</span>
+    }
+
+    private &lt;E extends Number&gt; boolean isNegative(final E e) {
+<span class="fc" id="L39">        int value = e.intValue();</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        return value &lt;= 0;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.3.201901230119</span></div></body></html>
