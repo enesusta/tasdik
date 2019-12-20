@@ -5,8 +5,8 @@
     <artifactId>validator</artifactId>
     <version>0.0.1</version>
     <properties>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <jacoco.version>0.8.3</jacoco.version>
     </properties>
@@ -53,7 +53,7 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>1.2.1</version>
                 <configuration>
-                    <mainClass>net.enesusta.validator.nonnull.NonNullTest</mainClass>
+                    <mainClass>NonNullTest</mainClass>
                     <arguments>
                         <argument>argument1</argument>
                     </arguments>
