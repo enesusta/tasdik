@@ -37,7 +37,7 @@ public class NegativeFieldValidator implements FieldValidator {
 
     private <E extends Number> boolean isNegative(final E e) {
         int value = e.intValue();
-        return value <= 0;
+        return value < 0;
     }
 
 

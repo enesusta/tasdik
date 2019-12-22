@@ -13,7 +13,7 @@ public class MinFieldValidator implements FieldValidator {
     }
 
     @Override
-    public boolean isFieldValid(Field field) throws IllegalAccessException {
+    public final boolean isFieldValid(final Field field) throws IllegalAccessException {
 
         field.setAccessible(true);
         boolean valid = true;
@@ -28,22 +28,19 @@ public class MinFieldValidator implements FieldValidator {
                     if (number.intValue() == 0)
                         break block;
                     final Min annotation = field.getAnnotation(Min.class);
-                    System.out.println("annotation = " + annotation.min());
                     valid = number.intValue() >= annotation.min();
-                    System.out.println(field.getName() + " value + " + number.intValue() + "  first valid " + valid);
                 }
             } else if (String.class.isInstance(validateableObject)) {
                 block:
                 {
-                    String string = (String) validateableObject;
+                    final String string = (String) validateableObject;
                     if (string.isEmpty()) break block;
                     final Min annotation = field.getAnnotation(Min.class);
                     valid = string.length() >= annotation.min();
-                    System.out.println(field.getName() + " value + " + string.length() + "  first valid " + valid);
                 }
             }
 
-        } catch (NullPointerException e) {
+        } catch (final NullPointerException e) {
             valid = false;
         }
 

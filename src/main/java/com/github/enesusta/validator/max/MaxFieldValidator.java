@@ -28,9 +28,6 @@ public class MaxFieldValidator implements FieldValidator {
                     if (number.intValue() == 0)
                         break block;
                     final Max annotation = field.getAnnotation(Max.class);
-                    System.out.println("field is : + " + field.getName());
-                    System.out.println("int value :  " + number.intValue());
-                    System.out.println("annotation.max : " + annotation.max());
                     valid = number.intValue() <= annotation.max();
                 }
             } else if (String.class.isInstance(validateableObject)) {

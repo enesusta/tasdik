@@ -14,8 +14,6 @@ public class NonNullFieldValidator implements FieldValidator {
     }
 
 
-
-
     @Override
     public final boolean isFieldValid(final Field field) throws IllegalAccessException {
 

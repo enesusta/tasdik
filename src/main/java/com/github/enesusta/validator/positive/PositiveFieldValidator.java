@@ -59,20 +59,10 @@ public class PositiveFieldValidator implements FieldValidator {
     private <E extends Number> boolean isPositive(final E e,
                                                   final Field field) {
         int value = e.intValue();
-        result(field.getName(), value, value >= 0);
+        //result(field.getName(), value, value >= 0);
         return value >= 0;
     }
 
-    /**
-     * @param name a
-     * @param a    a
-     * @param b    a
-     */
-    private void result(final String name, final int a, final boolean b) {
-        System.out.println("\n ===================== ");
-        System.out.println(name + " = " + a + " isValid = " + b);
-        System.out.println(" ===================== ");
-    }
 
 
 }
