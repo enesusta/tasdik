@@ -65,7 +65,7 @@ public final class DefaultValidator implements Validator {
             counter++;
         }
 
-        final Queue<Callable<Boolean>> callableQueue = new PriorityQueue<>();
+        /**final Queue<Callable<Boolean>> callableQueue = new ArrayDeque<>();
 
         final Callable<Boolean> nullBooleansCallable = hasAny(nullBooleans);
         final Callable<Boolean> positiveBooleansCallable = hasAny(positiveBooleans);
@@ -95,16 +95,16 @@ public final class DefaultValidator implements Validator {
 
         service.shutdown();
 
+*/
 
-
-        /** valid[0] = hasAnyFalse(nullBooleans);
+         valid[0] = hasAnyFalse(nullBooleans);
          valid[1] = hasAnyFalse(positiveBooleans);
          valid[2] = hasAnyFalse(negativeBooleans);
          valid[3] = hasAnyFalse(sizeBooleans);
          valid[4] = hasAnyFalse(maxBooleans);
          valid[5] = hasAnyFalse(minBooleans);
          valid[6] = hasAnyFalse(emailBooleans);
-         */
+
         return hasAnyFalse(valid);
     }
 

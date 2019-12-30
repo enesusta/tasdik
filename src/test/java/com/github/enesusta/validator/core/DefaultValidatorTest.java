@@ -26,7 +26,6 @@ class DefaultValidatorTest {
         student.setStduEmail("a@com");
 
         boolean valid = validator.isValid(student);
-        System.out.println("valid1 = " + valid);
         assertTrue(valid);
 
         student.setStduName("a1132123123321");
