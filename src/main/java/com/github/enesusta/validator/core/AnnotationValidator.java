@@ -1,5 +1,6 @@
 package com.github.enesusta.validator.core;
 
+import com.github.enesusta.validator.True.True;
 import com.github.enesusta.validator.email.Email;
 import com.github.enesusta.validator.max.Max;
 import com.github.enesusta.validator.min.Min;
@@ -43,5 +44,9 @@ public interface AnnotationValidator {
 
     default boolean isAnnotationPresentWithRegexAnnotation(final Field field) {
         return field.isAnnotationPresent(Regex.class);
+    }
+
+    default boolean isAnnotationPresentWithTrueAnnotation(final Field field) {
+        return field.isAnnotationPresent(True.class);
     }
 }

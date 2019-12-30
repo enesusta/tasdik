@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class RegexFieldValidator implements FieldValidator {
+public final class RegexFieldValidator implements FieldValidator {
 
     private final Object object;
 

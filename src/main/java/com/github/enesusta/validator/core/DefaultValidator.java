@@ -9,9 +9,14 @@ import com.github.enesusta.validator.positive.PositiveFieldValidator;
 import com.github.enesusta.validator.size.SizeFieldValidator;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public final class DefaultValidator implements Validator {
+
 
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {
@@ -60,20 +65,52 @@ public final class DefaultValidator implements Validator {
             counter++;
         }
 
-        valid[0] = hasAnyFalse(nullBooleans);
-        valid[1] = hasAnyFalse(positiveBooleans);
-        valid[2] = hasAnyFalse(negativeBooleans);
-        valid[3] = hasAnyFalse(sizeBooleans);
-        valid[4] = hasAnyFalse(maxBooleans);
-        valid[5] = hasAnyFalse(minBooleans);
-        valid[6] = hasAnyFalse(emailBooleans);
+        final Queue<Callable<Boolean>> callableQueue = new PriorityQueue<>();
 
+        final Callable<Boolean> nullBooleansCallable = hasAny(nullBooleans);
+        final Callable<Boolean> positiveBooleansCallable = hasAny(positiveBooleans);
+        final Callable<Boolean> negativeBooleansCallable = hasAny(negativeBooleans);
+        final Callable<Boolean> sizeBooleansCallable = hasAny(sizeBooleans);
+        final Callable<Boolean> maxBooleansCallable = hasAny(maxBooleans);
+        final Callable<Boolean> minBooleansCallable = hasAny(minBooleans);
+        final Callable<Boolean> emailBooleansCallable = hasAny(emailBooleans);
+
+        callableQueue.offer(nullBooleansCallable);
+        callableQueue.offer(positiveBooleansCallable);
+        callableQueue.offer(negativeBooleansCallable);
+        callableQueue.offer(sizeBooleansCallable);
+        callableQueue.offer(maxBooleansCallable);
+        callableQueue.offer(minBooleansCallable);
+        callableQueue.offer(emailBooleansCallable);
+
+        final int availableProcessors = Runtime.getRuntime().availableProcessors();
+        final ExecutorService service = Executors.newFixedThreadPool(availableProcessors);
+        List<Future<Boolean>> futureList = null;
+
+        try {
+            futureList = service.invokeAll(callableQueue);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        service.shutdown();
+
+
+
+        /** valid[0] = hasAnyFalse(nullBooleans);
+         valid[1] = hasAnyFalse(positiveBooleans);
+         valid[2] = hasAnyFalse(negativeBooleans);
+         valid[3] = hasAnyFalse(sizeBooleans);
+         valid[4] = hasAnyFalse(maxBooleans);
+         valid[5] = hasAnyFalse(minBooleans);
+         valid[6] = hasAnyFalse(emailBooleans);
+         */
         return hasAnyFalse(valid);
     }
 
     private boolean[] prepareValidationArray() {
         boolean[] booleans = new boolean[10];
-        Arrays.fill(booleans,true);
+        Arrays.fill(booleans, true);
         return booleans;
     }
 
@@ -87,5 +124,18 @@ public final class DefaultValidator implements Validator {
             }
         }
         return valid;
+    }
+
+    private Callable<Boolean> hasAny(final boolean[] booleans) {
+        return () -> {
+            boolean valid = true;
+            for (final boolean aBoolean : booleans) {
+                if (!aBoolean) {
+                    valid = false;
+                    break;
+                }
+            }
+            return valid;
+        };
     }
 }
