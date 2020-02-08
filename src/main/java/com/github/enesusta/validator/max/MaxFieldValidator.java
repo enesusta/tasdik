@@ -21,22 +21,22 @@ public class MaxFieldValidator implements FieldValidator {
 
         try {
             validateableObject = field.get(object);
-            if (Number.class.isInstance(validateableObject)) {
+            if (validateableObject instanceof Number) {
                 block:
                 {
                     final Number number = (Number) validateableObject;
                     if (number.intValue() == 0)
                         break block;
                     final Max annotation = field.getAnnotation(Max.class);
-                    valid = number.intValue() <= annotation.max();
+                    valid = number.intValue() <= annotation.value();
                 }
-            } else if (String.class.isInstance(validateableObject)) {
+            } else if (validateableObject instanceof String) {
                 block:
                 {
                     final String string = (String) validateableObject;
                     if (string.isEmpty()) break block;
                     final Max annotation = field.getAnnotation(Max.class);
-                    valid = string.length() <= annotation.max();
+                    valid = string.length() <= annotation.value();
                 }
             }
 

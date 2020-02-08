@@ -1,4 +1,4 @@
-package com.github.enesusta.validator.feature;
+package com.github.enesusta.validator.tru;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,5 +7,5 @@ import java.lang.annotation.Target;
 
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)
-public @interface Feature {
+public @interface True {
 }

@@ -28,7 +28,7 @@ public class MinFieldValidator implements FieldValidator {
                     if (number.intValue() == 0)
                         break block;
                     final Min annotation = field.getAnnotation(Min.class);
-                    valid = number.intValue() >= annotation.min();
+                    valid = number.intValue() >= annotation.value();
                 }
             } else if (String.class.isInstance(validateableObject)) {
                 block:
@@ -36,7 +36,7 @@ public class MinFieldValidator implements FieldValidator {
                     final String string = (String) validateableObject;
                     if (string.isEmpty()) break block;
                     final Min annotation = field.getAnnotation(Min.class);
-                    valid = string.length() >= annotation.min();
+                    valid = string.length() >= annotation.value();
                 }
             }
 
@@ -45,5 +45,10 @@ public class MinFieldValidator implements FieldValidator {
         }
 
         return valid;
+    }
+
+    @Override
+    public String toString() {
+        return "minFieldValitor";
     }
 }

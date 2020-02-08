@@ -1,4 +1,4 @@
-package com.github.enesusta.validator.True;
+package com.github.enesusta.validator.tru;
 
 import com.github.enesusta.validator.core.FieldValidator;
 

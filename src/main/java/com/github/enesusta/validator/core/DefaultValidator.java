@@ -47,10 +47,9 @@ public final class DefaultValidator implements Validator {
         byte counter = (byte) 0;
         for (Field field : fields) {
 
-            FieldContext fieldContext = FieldContext.getInstance();
-            fieldContext.isValid(field);
-
             field.setAccessible(true);
+
+/**
             if (isAnnotationPresentWithNonNullAnnotation(field))
                 nullBooleans[counter] = nullValidator.isFieldValid(field);
             if (isAnnotationPresentWithPositiveAnnotation(field))
@@ -65,7 +64,7 @@ public final class DefaultValidator implements Validator {
                 minBooleans[counter] = minValidator.isFieldValid(field);
             if (isAnnotationPresentWithEmailAnnotation(field))
                 emailBooleans[counter] = emailValidator.isFieldValid(field);
-
+*/
             counter++;
         }
 
@@ -98,16 +97,4 @@ public final class DefaultValidator implements Validator {
         return valid;
     }
 
-    private Callable<Boolean> hasAny(final boolean[] booleans) {
-        return () -> {
-            boolean valid = true;
-            for (final boolean aBoolean : booleans) {
-                if (!aBoolean) {
-                    valid = false;
-                    break;
-                }
-            }
-            return valid;
-        };
-    }
 }
