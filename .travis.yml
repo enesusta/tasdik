@@ -2,4 +2,4 @@ language: java
 sudo: false
 install: true
 script:
-  - mvn install
+  - mvn clean test
