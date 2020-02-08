@@ -8,10 +8,16 @@ import com.github.enesusta.validator.negative.NegativeFieldValidator;
 import com.github.enesusta.validator.positive.PositiveFieldValidator;
 import com.github.enesusta.validator.size.SizeFieldValidator;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
-import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 public final class DefaultValidator implements Validator {
+
 
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {
@@ -40,6 +46,9 @@ public final class DefaultValidator implements Validator {
 
         byte counter = (byte) 0;
         for (Field field : fields) {
+
+            FieldContext fieldContext = FieldContext.getInstance();
+            fieldContext.isValid(field);
 
             field.setAccessible(true);
             if (isAnnotationPresentWithNonNullAnnotation(field))
@@ -73,7 +82,7 @@ public final class DefaultValidator implements Validator {
 
     private boolean[] prepareValidationArray() {
         boolean[] booleans = new boolean[10];
-        Arrays.fill(booleans,true);
+        Arrays.fill(booleans, true);
         return booleans;
     }
 
@@ -87,5 +96,18 @@ public final class DefaultValidator implements Validator {
             }
         }
         return valid;
+    }
+
+    private Callable<Boolean> hasAny(final boolean[] booleans) {
+        return () -> {
+            boolean valid = true;
+            for (final boolean aBoolean : booleans) {
+                if (!aBoolean) {
+                    valid = false;
+                    break;
+                }
+            }
+            return valid;
+        };
     }
 }
