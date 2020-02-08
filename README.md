@@ -11,6 +11,6 @@
 <dependency>
   <groupId>com.github.enesusta</groupId>
   <artifactId>tasdik</artifactId>
-  <version>1.7.2</version>
+  <version>1.7.4-STABLE</version>
 </dependency>
 ```
