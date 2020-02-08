@@ -1,5 +1,7 @@
 package com.github.enesusta.validator.core;
 
+import com.github.enesusta.validator.fals.False;
+import com.github.enesusta.validator.fals.FalseFieldValidator;
 import com.github.enesusta.validator.tru.True;
 import com.github.enesusta.validator.tru.TrueFieldValidator;
 import com.github.enesusta.validator.email.Email;
@@ -25,8 +27,7 @@ import java.util.Map;
 public class FieldContext {
 
     private static FieldContext instance = null;
-    private Map<Class<? extends Annotation>, FieldValidator> contextMap = new HashMap<>(8);
-    private Object object;
+    private Map<Class<? extends Annotation>, FieldValidator> contextMap = new HashMap<>(9);
 
     private FieldContext(final Object o) {
         initialize(o);
@@ -41,9 +42,10 @@ public class FieldContext {
         contextMap.put(Regex.class, new RegexFieldValidator(object));
         contextMap.put(Size.class, new SizeFieldValidator(object));
         contextMap.put(True.class, new TrueFieldValidator(object));
+        contextMap.put(False.class, new FalseFieldValidator(object));
     }
 
-    public static FieldContext getInstance(Object o) {
+    public static FieldContext getInstance(final Object o) {
         if (instance == null)
             instance = new FieldContext(o);
         return instance;
@@ -51,17 +53,11 @@ public class FieldContext {
 
     public boolean isValid(final Field field) throws IllegalAccessException {
         boolean isValid = true;
-        for (Annotation annotation : field.getAnnotations()) {
-            if (!contextMap.get(annotation.annotationType()).isFieldValid(field)) {
-                System.out.println("girdi");
+        for (Annotation annotation : field.getAnnotations())
+            if (!contextMap.get(annotation.annotationType()).isFieldValid(field))
                 isValid = false;
-            }
-        }
 
         return isValid;
     }
 
-    public void setObject(Object object) {
-        this.object = object;
-    }
 }
