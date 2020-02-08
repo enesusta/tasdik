@@ -56,7 +56,6 @@ public class FieldContext {
         for (Annotation annotation : field.getAnnotations())
             if (!contextMap.get(annotation.annotationType()).isFieldValid(field))
                 isValid = false;
-
         return isValid;
     }
 

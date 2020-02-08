@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Arrays;
 
 public final class ContextValidator implements Validator {
+
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {
 
