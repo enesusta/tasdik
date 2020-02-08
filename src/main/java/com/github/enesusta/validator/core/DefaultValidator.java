@@ -8,6 +8,7 @@ import com.github.enesusta.validator.negative.NegativeFieldValidator;
 import com.github.enesusta.validator.positive.PositiveFieldValidator;
 import com.github.enesusta.validator.size.SizeFieldValidator;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.*;
 import java.util.concurrent.Callable;
@@ -46,6 +47,9 @@ public final class DefaultValidator implements Validator {
         byte counter = (byte) 0;
         for (Field field : fields) {
 
+            FieldContext fieldContext = FieldContext.getInstance();
+            fieldContext.isValid(field);
+
             field.setAccessible(true);
             if (isAnnotationPresentWithNonNullAnnotation(field))
                 nullBooleans[counter] = nullValidator.isFieldValid(field);
@@ -65,45 +69,13 @@ public final class DefaultValidator implements Validator {
             counter++;
         }
 
-        /**final Queue<Callable<Boolean>> callableQueue = new ArrayDeque<>();
-
-        final Callable<Boolean> nullBooleansCallable = hasAny(nullBooleans);
-        final Callable<Boolean> positiveBooleansCallable = hasAny(positiveBooleans);
-        final Callable<Boolean> negativeBooleansCallable = hasAny(negativeBooleans);
-        final Callable<Boolean> sizeBooleansCallable = hasAny(sizeBooleans);
-        final Callable<Boolean> maxBooleansCallable = hasAny(maxBooleans);
-        final Callable<Boolean> minBooleansCallable = hasAny(minBooleans);
-        final Callable<Boolean> emailBooleansCallable = hasAny(emailBooleans);
-
-        callableQueue.offer(nullBooleansCallable);
-        callableQueue.offer(positiveBooleansCallable);
-        callableQueue.offer(negativeBooleansCallable);
-        callableQueue.offer(sizeBooleansCallable);
-        callableQueue.offer(maxBooleansCallable);
-        callableQueue.offer(minBooleansCallable);
-        callableQueue.offer(emailBooleansCallable);
-
-        final int availableProcessors = Runtime.getRuntime().availableProcessors();
-        final ExecutorService service = Executors.newFixedThreadPool(availableProcessors);
-        List<Future<Boolean>> futureList = null;
-
-        try {
-            futureList = service.invokeAll(callableQueue);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        service.shutdown();
-
-*/
-
-         valid[0] = hasAnyFalse(nullBooleans);
-         valid[1] = hasAnyFalse(positiveBooleans);
-         valid[2] = hasAnyFalse(negativeBooleans);
-         valid[3] = hasAnyFalse(sizeBooleans);
-         valid[4] = hasAnyFalse(maxBooleans);
-         valid[5] = hasAnyFalse(minBooleans);
-         valid[6] = hasAnyFalse(emailBooleans);
+        valid[0] = hasAnyFalse(nullBooleans);
+        valid[1] = hasAnyFalse(positiveBooleans);
+        valid[2] = hasAnyFalse(negativeBooleans);
+        valid[3] = hasAnyFalse(sizeBooleans);
+        valid[4] = hasAnyFalse(maxBooleans);
+        valid[5] = hasAnyFalse(minBooleans);
+        valid[6] = hasAnyFalse(emailBooleans);
 
         return hasAnyFalse(valid);
     }

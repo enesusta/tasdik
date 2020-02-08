@@ -37,8 +37,6 @@ class DefaultValidatorTest {
         student.setStduNote((byte) 120);
         assertFalse(validator.isValid(student));
 
-
-
     }
 
     @Test
