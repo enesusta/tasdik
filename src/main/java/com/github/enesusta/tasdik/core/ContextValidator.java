@@ -1,7 +1,6 @@
 package com.github.enesusta.tasdik.core;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 
 public final class ContextValidator implements Validator {
 
@@ -19,7 +18,6 @@ public final class ContextValidator implements Validator {
         for (Field field : fields)
             booleans[counter++] = fieldContext.isValid(field);
 
-        System.out.println(Arrays.toString(booleans));
         return hasAny(booleans);
     }
 }

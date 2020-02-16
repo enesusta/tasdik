@@ -11,6 +11,10 @@
 <dependency>
   <groupId>com.github.enesusta</groupId>
   <artifactId>tasdik</artifactId>
-  <version>1.7.5</version>
+  <version>1.7.6</version>
 </dependency>
 ```
+
+### Structure
+
+![alt-text](src/main/resources/tasdik.png)
