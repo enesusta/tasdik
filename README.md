@@ -15,6 +15,6 @@
 </dependency>
 ```
 
-### Structure
+### Visualisation Of Implementation
 
-![alt-text](src/main/resources/tasdik.png)
+![alt-text](docs/tasdik.svg)
