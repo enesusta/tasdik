@@ -17,4 +17,4 @@
 
 ### Visualisation Of Implementation
 
-![alt-text](docs/tasdik.svg)
+![alt-text](docs/tasdik.png)
