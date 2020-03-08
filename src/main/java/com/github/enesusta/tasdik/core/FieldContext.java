@@ -18,6 +18,8 @@ import com.github.enesusta.tasdik.regex.Regex;
 import com.github.enesusta.tasdik.regex.RegexFieldValidator;
 import com.github.enesusta.tasdik.size.Size;
 import com.github.enesusta.tasdik.size.SizeFieldValidator;
+import com.github.enesusta.tasdik.validator.FieldValidator;
+import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;

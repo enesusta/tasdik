@@ -1,6 +1,6 @@
 package com.github.enesusta.tasdik.regex;
 
-import com.github.enesusta.tasdik.core.FieldValidator;
+import com.github.enesusta.tasdik.validator.FieldValidator;
 
 import java.lang.reflect.Field;
 import java.util.regex.Matcher;

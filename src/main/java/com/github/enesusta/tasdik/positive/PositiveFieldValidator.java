@@ -1,7 +1,7 @@
 
 package com.github.enesusta.tasdik.positive;
 
-import com.github.enesusta.tasdik.core.FieldValidator;
+import com.github.enesusta.tasdik.validator.FieldValidator;
 
 import java.lang.reflect.Field;
 

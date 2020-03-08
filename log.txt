@@ -1,1 +1,0 @@
-sampleStaticString is null

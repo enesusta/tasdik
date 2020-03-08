@@ -1,8 +1,12 @@
-package com.github.enesusta.tasdik.core;
+package com.github.enesusta.tasdik.validator;
+
+import com.github.enesusta.tasdik.core.FieldContext;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 
-public final class ContextValidator implements Validator {
+@Component
+public final class DefaultValidator implements Validator {
 
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {

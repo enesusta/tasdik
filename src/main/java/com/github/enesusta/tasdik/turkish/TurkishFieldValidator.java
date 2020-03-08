@@ -1,9 +1,8 @@
 package com.github.enesusta.tasdik.turkish;
 
-import com.github.enesusta.tasdik.core.FieldValidator;
+import com.github.enesusta.tasdik.validator.FieldValidator;
 
 import java.lang.reflect.Field;
-import java.util.regex.Pattern;
 
 public class TurkishFieldValidator implements FieldValidator {
 
@@ -16,7 +15,6 @@ public class TurkishFieldValidator implements FieldValidator {
     @Override
     public final boolean isFieldValid(final Field field) throws IllegalAccessException {
         field.setAccessible(true);
-
         return false;
     }
 }

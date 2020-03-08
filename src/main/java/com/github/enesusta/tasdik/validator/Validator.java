@@ -1,4 +1,4 @@
-package com.github.enesusta.tasdik.core;
+package com.github.enesusta.tasdik.validator;
 
 public interface Validator {
     boolean isValid(Object object) throws IllegalAccessException;
