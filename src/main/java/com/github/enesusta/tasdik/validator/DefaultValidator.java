@@ -1,12 +1,12 @@
 package com.github.enesusta.tasdik.validator;
 
 import com.github.enesusta.tasdik.core.FieldContext;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 
-@Component
 public final class DefaultValidator implements Validator {
+
+    private static DefaultValidator instance = null;
 
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {
@@ -23,5 +23,11 @@ public final class DefaultValidator implements Validator {
             booleans[counter++] = fieldContext.isValid(field);
 
         return hasAny(booleans);
+    }
+
+    public static DefaultValidator getInstance() {
+        if (instance == null)
+            instance = new DefaultValidator();
+        return instance;
     }
 }
