@@ -128,17 +128,32 @@ There are 1 concrete class of Validator.
 - DefaultValidator
 
 ```java
+public interface Validator {
+    boolean isValid(Object object) throws IllegalAccessException;
+
+    default boolean hasAny(boolean[] arr) {
+        boolean valid = true;
+        for (boolean b : arr) {
+            if (!b) {
+                valid = false;
+                break;
+            }
+        }
+        return valid;
+    }
+}
+```
+##### FieldValidator
+
+**FieldValidator** interface is heart of the instrastructe of Tasdik. There are 10 concrete class of FieldValidator.
+
+```java
 import java.lang.reflect.Field;
 
 public interface FieldValidator {
     boolean isFieldValid(Field field) throws IllegalAccessException;
 }
 ```
-
-##### FieldValidator
-
-**FieldValidator** interface is heart of the instrastructe of Tasdik. There are 10 concrete class of FieldValidator.
-
 
 Those are:
 - FalseFieldValidator
