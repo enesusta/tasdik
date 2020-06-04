@@ -8,6 +8,10 @@ public final class DefaultValidator implements Validator {
 
     private static DefaultValidator instance = null;
 
+    private DefaultValidator() {
+
+    }
+
     @Override
     public final boolean isValid(final Object object) throws IllegalAccessException {
 

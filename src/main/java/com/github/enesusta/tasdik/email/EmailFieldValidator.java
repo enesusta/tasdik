@@ -21,7 +21,6 @@ public class EmailFieldValidator implements FieldValidator {
         try {
 
             final String fieldString = (String) field.get(object);
-            System.out.println("fieldString = " + fieldString);
 
             block:
             {
